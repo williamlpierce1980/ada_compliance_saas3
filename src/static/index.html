@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADA Compliance Checker - Protect Your Business</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .loading {
+            display: none;
+        }
+        .loading.active {
+            display: block;
+        }
+        .risk-high { color: #dc2626; }
+        .risk-medium { color: #d97706; }
+        .risk-low { color: #059669; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="logo.png" alt="ADA Compliance Checker Logo" class="h-12 w-12">
+                    <div>
+                        <h1 class="text-2xl font-bold">ADA Compliance Checker</h1>
+                        <p class="text-blue-100">Protect Your Business from ADA Lawsuits</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-blue-100">Free Analysis</p>
+                    <p class="text-lg font-semibold">Save $1000s in Legal Fees</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Is Your Website ADA Compliant?</h2>
+            <p class="text-xl text-gray-600 mb-6">Over 4,000 ADA lawsuits were filed in 2024. Don't let your business be next.</p>
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 max-w-2xl mx-auto">
+                <p class="text-red-800"><i class="fas fa-exclamation-triangle mr-2"></i>
+                <strong>Florida businesses are at high risk:</strong> Restaurants, real estate agencies, and service businesses are frequently targeted.</p>
+            </div>
+        </div>
+
+        <!-- Analysis Form -->
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg card-shadow p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-search mr-2 text-blue-600"></i>
+                    Free Website Analysis
+                </h3>
+                
+                <form id="analysisForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="website-url" class="block text-sm font-medium text-gray-700 mb-2">
+                                Website URL *
+                            </label>
+                            <input type="url" id="website-url" name="url" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                   placeholder="https://yourwebsite.com" required>
+                        </div>
+                        <div>
+                            <label for="business-type" class="block text-sm font-medium text-gray-700 mb-2">
+                                Business Type
+                            </label>
+                            <select id="business-type" name="business_type" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="general">General Business</option>
+                                <option value="restaurant">Restaurant/Food Service</option>
+                                <option value="real estate">Real Estate</option>
+                                <option value="retail">Retail/E-commerce</option>
+                                <option value="service">Service Business</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="legal">Legal/Professional</option>
+                                <option value="hvac">HVAC/Contractor</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center space-x-4">
+                        <button type="button" id="quickScanBtn" 
+                                class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-200">
+                            <i class="fas fa-bolt mr-2"></i>Quick Scan (30 sec)
+                        </button>
+                        <button type="submit" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-200">
+                            <i class="fas fa-microscope mr-2"></i>Full Analysis (2 min)
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Loading State -->
+                <div id="loading" class="loading text-center py-8">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    <p class="mt-4 text-gray-600">Analyzing your website...</p>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="hidden">
+                <!-- Quick Scan Results -->
+                <div id="quickResults" class="bg-white rounded-lg card-shadow p-8 mb-8 hidden">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-tachometer-alt mr-2 text-green-600"></i>
+                        Quick Scan Results
+                    </h3>
+                    <div id="quickResultsContent"></div>
+                </div>
+
+                <!-- Full Analysis Results -->
+                <div id="fullResults" class="bg-white rounded-lg card-shadow p-8 mb-8 hidden">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-clipboard-check mr-2 text-blue-600"></i>
+                        Detailed Compliance Analysis
+                    </h3>
+                    <div id="fullResultsContent"></div>
+                </div>
+
+                <!-- Risk Assessment -->
+                <div id="riskAssessment" class="bg-white rounded-lg card-shadow p-8 mb-8 hidden">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-exclamation-triangle mr-2 text-orange-600"></i>
+                        Business Risk Assessment
+                    </h3>
+                    <div id="riskAssessmentContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="max-w-6xl mx-auto mt-16">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Choose Our ADA Compliance Checker?</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-robot text-2xl text-blue-600"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">AI-Powered Analysis</h4>
+                    <p class="text-gray-600">Advanced algorithms check for the most common ADA compliance issues that lead to lawsuits.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-clock text-2xl text-green-600"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Instant Results</h4>
+                    <p class="text-gray-600">Get immediate feedback on your website's compliance status and actionable recommendations.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-purple-600"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Legal Protection</h4>
+                    <p class="text-gray-600">Reduce your risk of costly ADA lawsuits with proactive compliance monitoring.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">&copy; 2025 ADA Compliance Checker. Protecting Florida businesses from accessibility lawsuits.</p>
+            <p class="text-sm text-gray-400">
+                <strong>Legal Disclaimer:</strong> This tool provides general information about website accessibility and does not constitute legal advice. 
+                Consult with a qualified attorney for specific legal guidance regarding ADA compliance.
+            </p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
