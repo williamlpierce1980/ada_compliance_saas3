@@ -133,6 +133,13 @@
                         Detailed Compliance Analysis
                     </h3>
                     <div id="fullResultsContent"></div>
+                    <div id="download-section" style="text-align: center; margin-top: 20px; display: none;">
+    <button onclick="downloadReport()" style="background: #2563eb; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">
+        📄 Download Report
+    </button>
+</div>
+
+
                 </div>
 
                 <!-- Risk Assessment -->
@@ -222,6 +229,9 @@ function downloadReport() {
     
     // Download the report
     const blob = new Blob([reportHTML], { type: 'text/html' });
+    // Show download button after analysis
+document.getElementById('download-section').style.display = 'block';
+
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
