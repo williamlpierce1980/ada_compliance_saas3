@@ -187,6 +187,50 @@
     </footer>
 
     <script src="app.js"></script>
+    <script>
+function downloadReport() {
+    // Get the current results
+    const resultsDiv = document.getElementById('results');
+    if (!resultsDiv || resultsDiv.innerHTML.trim() === '') {
+        alert('Please run an analysis first before downloading the report.');
+        return;
+    }
+    
+    // Create a simple HTML report
+    const reportHTML = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ADA Compliance Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { background: #2563eb; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .issue { margin: 10px 0; padding: 10px; border-left: 4px solid #ef4444; background: #fef2f2; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ADA Compliance Report</h1>
+        <p>Generated on ${new Date().toLocaleDateString()}</p>
+    </div>
+    <div class="content">
+        ${resultsDiv.innerHTML}
+    </div>
+</body>
+</html>`;
+    
+    // Download the report
+    const blob = new Blob([reportHTML], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ada-compliance-report.html';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+</script>
+
 </body>
 </html>
 
